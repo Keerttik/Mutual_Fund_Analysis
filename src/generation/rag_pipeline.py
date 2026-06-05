@@ -14,11 +14,17 @@ api_key = os.getenv("GROQ_API_KEY")
 if not api_key:
     print("WARNING: GROQ_API_KEY not found in environment. LLM generation will fail.")
 
-llm = ChatGroq(
-    model="llama-3.1-8b-instant",
-    temperature=0.0,  # Factual retrieval, no creativity
-    max_tokens=150,
-)
+_llm_instance = None
+
+def get_llm():
+    global _llm_instance
+    if _llm_instance is None:
+        _llm_instance = ChatGroq(
+            model="llama-3.1-8b-instant",
+            temperature=0.0,  # Factual retrieval, no creativity
+            max_tokens=150,
+        )
+    return _llm_instance
 
 retriever = MutualFundRetriever()
 
@@ -58,7 +64,7 @@ def generate_answer(query: str, fund_context: str = None) -> tuple[str, list[str
         if "scheme_id" in doc.metadata:
             sources.add(doc.metadata["scheme_id"])
 
-    chain = prompt | llm | StrOutputParser()
+    chain = prompt | get_llm() | StrOutputParser()
     
     response = chain.invoke({
         "context": context_str,
