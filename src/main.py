@@ -40,4 +40,6 @@ def health_check():
     return {"status": "ok", "message": "Mutual Fund RAG API is running"}
 
 if __name__ == "__main__":
-    uvicorn.run("src.main:app", host="0.0.0.0", port=8001, reload=False)
+    import os
+    port = int(os.environ.get("PORT", 8001))
+    uvicorn.run("src.main:app", host="0.0.0.0", port=port, reload=False)
