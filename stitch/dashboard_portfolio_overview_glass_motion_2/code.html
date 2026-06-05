@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GROWW_CLONE - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#3a495f",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed": "#0b1c30",
+                      "tertiary-fixed-dim": "#b7c8e1",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "surface-container-low": "#f2f4f6",
+                      "inverse-primary": "#2fe0aa",
+                      "on-secondary-container": "#5c647a",
+                      "background": "#f7f9fb",
+                      "surface": "#f7f9fb",
+                      "tertiary": "#505f76",
+                      "tertiary-fixed": "#d3e4fe",
+                      "tertiary-container": "#a8b9d2",
+                      "primary-fixed": "#59fdc5",
+                      "outline": "#6b7b72",
+                      "on-primary-fixed": "#002116",
+                      "secondary-container": "#dae2fd",
+                      "on-background": "#191c1e",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "on-primary-container": "#00533c",
+                      "secondary-fixed": "#dae2fd",
+                      "surface-dim": "#d8dadc",
+                      "on-error": "#ffffff",
+                      "surface-variant": "#e0e3e5",
+                      "surface-container": "#eceef0",
+                      "inverse-on-surface": "#eff1f3",
+                      "primary-fixed-dim": "#2fe0aa",
+                      "on-secondary-fixed": "#131b2e",
+                      "on-tertiary-fixed-variant": "#38485d",
+                      "primary": "#006c4f",
+                      "inverse-surface": "#2d3133",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "on-secondary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "outline-variant": "#bacac1",
+                      "surface-container-highest": "#e0e3e5",
+                      "secondary": "#565e74",
+                      "surface-bright": "#f7f9fb",
+                      "primary-container": "#00d09c",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-high": "#e6e8ea",
+                      "on-surface": "#191c1e",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#3c4a43",
+                      "surface-tint": "#006c4f",
+                      "on-primary-fixed-variant": "#00513b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-gap-sm": "0.5rem",
+                      "container-padding-x": "1.5rem",
+                      "container-padding-y": "1rem",
+                      "stack-gap-md": "1rem",
+                      "stack-gap-lg": "2rem",
+                      "section-margin": "3rem",
+                      "grid-gutter": "1.5rem"
+              },
+              "fontFamily": {
+                      "currency-display": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "display-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "currency-display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            color: theme('colors.on-background');
+        }
+        @keyframes ambient-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .bg-ambient {
+            background: linear-gradient(-45deg, theme('colors.background'), theme('colors.surface-container'), rgba(0, 208, 156, 0.08), theme('colors.surface-container-low'), theme('colors.background'));
+            background-size: 400% 400%;
+            animation: ambient-gradient 30s ease infinite;
+        }
+        .dark .bg-ambient {
+            background: #0B0F19;
+            animation: none;
+        }
+        /* Transition utilities for smooth color shifts */
+        .transition-theme {
+            transition-property: background-color, border-color, color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
+    </style>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const html = document.documentElement;
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+
+            // Check for saved theme preference or system preference
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            const setTheme = (isDark) => {
+                if (isDark) {
+                    html.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeIcon.textContent = 'light_mode';
+                } else {
+                    html.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    themeIcon.textContent = 'dark_mode';
+                }
+            };
+
+            // Initialize theme
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                setTheme(true);
+            } else {
+                setTheme(false);
+            }
+
+            // Toggle theme on click
+            themeToggleBtn.addEventListener('click', () => {
+                setTheme(!html.classList.contains('dark'));
+            });
+        });
+    </script>
+</head>
+<body class="antialiased min-h-screen flex flex-col bg-ambient transition-theme dark:bg-[#0B0F19]">
+<!-- TopAppBar -->
+<header class="bg-surface-container-lowest dark:bg-[#1E2330] transition-theme w-full h-16 border-b border-outline-variant dark:border-white/10 shadow-sm shrink-0 relative z-10">
+<div class="flex items-center justify-between px-container-padding-x max-w-full mx-auto h-full">
+<div class="flex items-center gap-8">
+<!-- Brand Logo -->
+<div class="flex items-center gap-2">
+<img alt="GROWW_CLONE Logo" class="h-8 w-auto" src="data:image/png;base64,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"/>
+</div>
+<!-- Navigation Links (Web) -->
+<nav class="hidden md:flex items-center gap-6 h-full">
+<a class="h-full flex items-center px-2 text-secondary dark:text-[#94A3B8] hover:bg-surface-container dark:hover:bg-white/5 transition-theme font-body-md text-body-md" href="#">Explore</a>
+<a class="h-full flex items-center px-2 text-primary dark:text-[#F8FAFC] font-semibold border-b-2 border-primary dark:border-[#00D09C] hover:bg-surface-container dark:hover:bg-white/5 transition-theme font-body-md text-body-md" href="#">Investments</a>
+<a class="h-full flex items-center px-2 text-secondary dark:text-[#94A3B8] hover:bg-surface-container dark:hover:bg-white/5 transition-theme font-body-md text-body-md" href="#">Reports</a>
+</nav>
+</div>
+<!-- Search (On Left conceptually, but flexed here) & Actions -->
+<div class="flex items-center gap-4">
+<div class="hidden md:flex relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary dark:text-[#94A3B8] text-sm transition-theme">search</span>
+<input class="pl-10 pr-4 py-2 rounded-full border border-outline-variant dark:border-white/20 bg-surface-container-lowest dark:bg-[#1E2330] text-body-md dark:text-[#F8FAFC] dark:placeholder-[#94A3B8] focus:border-primary dark:focus:border-[#00D09C] focus:ring-1 focus:ring-primary dark:focus:ring-[#00D09C] outline-none w-64 transition-all transition-theme" placeholder="Search mutual funds..." type="text"/>
+</div>
+<button aria-label="Dark Mode" class="p-2 rounded-full hover:bg-surface-container dark:hover:bg-white/10 transition-colors duration-200 text-primary dark:text-[#F8FAFC] active:scale-95 transition-transform" id="theme-toggle">
+<span class="material-symbols-outlined transition-theme" data-icon="dark_mode" id="theme-icon">dark_mode</span>
+</button>
+<button aria-label="Notifications" class="p-2 rounded-full hover:bg-surface-container dark:hover:bg-white/10 transition-colors duration-200 text-primary dark:text-[#F8FAFC] active:scale-95 transition-transform relative">
+<span class="material-symbols-outlined transition-theme" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error dark:bg-[#FF4B4B] rounded-full transition-theme"></span>
+</button>
+<button class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant dark:border-white/20 hover:opacity-80 transition-opacity active:scale-95 transition-theme">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgsuHrZrSLDG9s82fnGk4NS_CSCJbq8d7IABmjvV0YpKLzlczAuCz9fZxBiP3-wn9ZpS8xEEF0gngMDXjBZXWGf_8lLSf4qY-9DEcPX6_T3QZaPy8Fz_q_-HmkhdCflIj9XwFcC3muEfRGdWn-nMHoRKAnQwu0jT1e34S3nLMTxn7W9rEsnYYQoD7FqYJOq0sJxZ5h3NqUhiuh9q1QVso1WqjlvrZ2mshXQFJf48mr9-eS_RkIVK_l7mVHbSllaxjYsJfI7Lcr0kGq"/>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full flex flex-col gap-stack-lg relative z-0">
+<!-- Header Section -->
+<div class="flex flex-col gap-2 transition-theme">
+<h1 class="font-headline-lg text-headline-lg text-on-background dark:text-[#F8FAFC] transition-theme">Portfolio Overview</h1>
+<p class="font-body-md text-body-md text-secondary dark:text-[#94A3B8] transition-theme">Track and analyze your investments across categories.</p>
+</div>
+<!-- Metrics Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Current Value -->
+<div class="rounded-2xl border border-outline-variant/30 dark:border-white/10 p-6 shadow-sm flex flex-col gap-2 backdrop-blur-md bg-surface-container-lowest/70 dark:bg-[#1E2330] transition-theme">
+<span class="font-label-sm text-label-sm uppercase text-secondary dark:text-[#94A3B8] tracking-wider transition-theme">Current Value</span>
+<span class="font-currency-display text-currency-display text-on-background dark:text-[#F8FAFC] transition-theme">₹4,82,910</span>
+</div>
+<!-- Total Investment -->
+<div class="rounded-2xl border border-outline-variant/30 dark:border-white/10 p-6 shadow-sm flex flex-col gap-2 backdrop-blur-md bg-surface-container-lowest/70 dark:bg-[#1E2330] transition-theme">
+<span class="font-label-sm text-label-sm uppercase text-secondary dark:text-[#94A3B8] tracking-wider transition-theme">Total Investment</span>
+<span class="font-headline-md text-headline-md text-secondary dark:text-[#F8FAFC] transition-theme">₹4,20,000</span>
+</div>
+<!-- Total Returns -->
+<div class="rounded-2xl border border-outline-variant/30 dark:border-white/10 p-6 shadow-sm flex flex-col gap-2 backdrop-blur-md bg-surface-container-lowest/70 dark:bg-[#1E2330] transition-theme">
+<span class="font-label-sm text-label-sm uppercase text-secondary dark:text-[#94A3B8] tracking-wider transition-theme">Total Returns</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container dark:text-[#00D09C] transition-theme">trending_up</span>
+<span class="font-headline-md text-headline-md text-primary-container dark:text-[#00D09C] transition-theme">+₹62,910</span>
+</div>
+</div>
+<!-- 1-Day Returns -->
+<div class="rounded-2xl border border-outline-variant/30 dark:border-white/10 p-6 shadow-sm flex flex-col gap-2 backdrop-blur-md bg-surface-container-lowest/70 dark:bg-[#1E2330] transition-theme">
+<span class="font-label-sm text-label-sm uppercase text-secondary dark:text-[#94A3B8] tracking-wider transition-theme">1-Day Returns</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-primary-container dark:text-[#00D09C] transition-theme">+₹1,240</span>
+<span class="font-label-md text-label-md text-primary-container dark:text-[#00D09C] bg-primary-container/10 dark:bg-[#00D09C]/10 px-2 py-0.5 rounded-full transition-theme">(+0.26%)</span>
+</div>
+</div>
+</section>
+<!-- Bento Layout: Allocation & Table -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Asset Allocation (1 col) -->
+<div class="rounded-2xl border border-outline-variant/30 dark:border-white/10 shadow-sm flex flex-col h-full backdrop-blur-md bg-surface-container-lowest/70 dark:bg-[#1E2330] transition-theme">
+<div class="p-6 border-b border-outline-variant/20 dark:border-white/10 transition-theme">
+<h2 class="font-headline-md text-headline-md text-on-background dark:text-[#F8FAFC] transition-theme">Asset Allocation</h2>
+</div>
+<div class="p-6 flex-1 flex flex-col items-center justify-center gap-8">
+<!-- Conceptual Donut Chart (CSS) -->
+<div class="relative w-48 h-48 rounded-full flex items-center justify-center" style="background: conic-gradient(#00D09C 0% 70%, #565e74 70% 90%, #d3e4fe 90% 100%);">
+<div class="absolute w-32 h-32 bg-surface-container-lowest dark:bg-[#1E2330] rounded-full flex items-center justify-center shadow-inner transition-theme">
+<div class="text-center">
+<span class="font-label-sm text-label-sm text-secondary dark:text-[#94A3B8] block transition-theme">Total Assets</span>
+<span class="font-headline-md text-headline-md text-on-background dark:text-[#F8FAFC] transition-theme">3</span>
+</div>
+</div>
+</div>
+<!-- Legend -->
+<div class="w-full flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary-container dark:bg-[#00D09C] transition-theme"></div>
+<span class="font-label-md text-label-md text-secondary dark:text-[#94A3B8] transition-theme">Equity</span>
+</div>
+<span class="font-label-md text-label-md text-on-background dark:text-[#F8FAFC] transition-theme">70%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary dark:bg-[#565e74] transition-theme"></div>
+<span class="font-label-md text-label-md text-secondary dark:text-[#94A3B8] transition-theme">Debt</span>
+</div>
+<span class="font-label-md text-label-md text-on-background dark:text-[#F8FAFC] transition-theme">20%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-tertiary-fixed dark:bg-[#d3e4fe] transition-theme"></div>
+<span class="font-label-md text-label-md text-secondary dark:text-[#94A3B8] transition-theme">Hybrid</span>
+</div>
+<span class="font-label-md text-label-md text-on-background dark:text-[#F8FAFC] transition-theme">10%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Current Investments Table (2 cols) -->
+<div class="lg:col-span-2 rounded-2xl border border-outline-variant/30 dark:border-white/10 shadow-sm flex flex-col backdrop-blur-md bg-surface-container-lowest/70 dark:bg-[#1E2330] transition-theme">
+<div class="p-6 border-b border-outline-variant/20 dark:border-white/10 flex justify-between items-center transition-theme">
+<h2 class="font-headline-md text-headline-md text-on-background dark:text-[#F8FAFC] transition-theme">Current Investments</h2>
+<button class="text-primary dark:text-[#00D09C] font-label-md text-label-md hover:underline transition-theme">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-surface-container-high dark:border-white/10 bg-surface-bright/50 dark:bg-white/5 transition-theme">
+<th class="p-4 font-label-md text-label-md text-secondary dark:text-[#94A3B8] font-medium transition-theme">Fund Name</th>
+<th class="p-4 font-label-md text-label-md text-secondary dark:text-[#94A3B8] font-medium transition-theme">Invested</th>
+<th class="p-4 font-label-md text-label-md text-secondary dark:text-[#94A3B8] font-medium transition-theme">Current Value</th>
+<th class="p-4 font-label-md text-label-md text-secondary dark:text-[#94A3B8] font-medium text-right transition-theme">Returns</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high dark:divide-white/10 transition-theme">
+<tr class="hover:bg-surface-container-low dark:hover:bg-white/5 transition-colors group cursor-pointer">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-variant dark:bg-white/10 flex items-center justify-center shrink-0 transition-theme">
+<span class="material-symbols-outlined text-secondary dark:text-[#94A3B8] transition-theme">account_balance</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-background dark:text-[#F8FAFC] transition-theme">Axis Bluechip Fund</div>
+<div class="font-label-sm text-label-sm text-secondary dark:text-[#94A3B8] transition-theme">Equity - Large Cap</div>
+</div>
+</div>
+</td>
+<td class="p-4 font-body-md text-body-md text-on-background dark:text-[#F8FAFC] transition-theme">₹1,50,000</td>
+<td class="p-4 font-body-md text-body-md text-on-background dark:text-[#F8FAFC] transition-theme">₹1,85,420</td>
+<td class="p-4 text-right">
+<div class="font-body-md text-body-md text-primary-container dark:text-[#00D09C] font-medium transition-theme">+23.61%</div>
+<div class="font-label-sm text-label-sm text-secondary dark:text-[#94A3B8] transition-theme">+₹35,420</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low dark:hover:bg-white/5 transition-colors group cursor-pointer">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-variant dark:bg-white/10 flex items-center justify-center shrink-0 transition-theme">
+<span class="material-symbols-outlined text-secondary dark:text-[#94A3B8] transition-theme">domain</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-background dark:text-[#F8FAFC] transition-theme">Parag Parikh Flexi Cap</div>
+<div class="font-label-sm text-label-sm text-secondary dark:text-[#94A3B8] transition-theme">Equity - Flexi Cap</div>
+</div>
+</div>
+</td>
+<td class="p-4 font-body-md text-body-md text-on-background dark:text-[#F8FAFC] transition-theme">₹1,20,000</td>
+<td class="p-4 font-body-md text-body-md text-on-background dark:text-[#F8FAFC] transition-theme">₹1,48,900</td>
+<td class="p-4 text-right">
+<div class="font-body-md text-body-md text-primary-container dark:text-[#00D09C] font-medium transition-theme">+24.08%</div>
+<div class="font-label-sm text-label-sm text-secondary dark:text-[#94A3B8] transition-theme">+₹28,900</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low dark:hover:bg-white/5 transition-colors group cursor-pointer">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-variant dark:bg-white/10 flex items-center justify-center shrink-0 transition-theme">
+<span class="material-symbols-outlined text-secondary dark:text-[#94A3B8] transition-theme">trending_flat</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-background dark:text-[#F8FAFC] transition-theme">HDFC Short Term Debt</div>
+<div class="font-label-sm text-label-sm text-secondary dark:text-[#94A3B8] transition-theme">Debt - Short Duration</div>
+</div>
+</div>
+</td>
+<td class="p-4 font-body-md text-body-md text-on-background dark:text-[#F8FAFC] transition-theme">₹1,50,000</td>
+<td class="p-4 font-body-md text-body-md text-on-background dark:text-[#F8FAFC] transition-theme">₹1,48,590</td>
+<td class="p-4 text-right">
+<div class="font-body-md text-body-md text-error dark:text-[#FF4B4B] font-medium transition-theme">-0.94%</div>
+<div class="font-label-sm text-label-sm text-secondary dark:text-[#94A3B8] transition-theme">-₹1,410</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+</body></html>

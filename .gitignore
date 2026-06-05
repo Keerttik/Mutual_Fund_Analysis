@@ -1,0 +1,32 @@
+# Environment Variables
+.env
+
+# Python caching
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Data and Indices
+data/raw/*
+data/processed/*
+data/index/*
+
+# Keep data directory structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/index/.gitkeep
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+
+# Testing
+.pytest_cache/
+.coverage

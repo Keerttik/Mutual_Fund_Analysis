@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Fund Analytics — Investora</title>
+    <meta name="description" content="Detailed analytics for HDFC Mutual Funds on Investora."/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg: #f7f9fc;
+            --card: #ffffff;
+            --border: #e5e7eb;
+            --text: #111827;
+            --muted: #6b7280;
+            --accent: #11998e;
+            --accent-light: #eefdf4;
+            --accent-hover: #0f8b80;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400; vertical-align: middle; }
+
+        /* HEADER */
+        header {
+            background: rgba(255,255,255,0.9); backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border); height: 70px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 40px; position: sticky; top: 0; z-index: 50;
+        }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -0.02em; text-decoration: none; color: var(--text); }
+        .brand .logo-icon { color: var(--accent); font-size: 28px; }
+        .btn-back-header {
+            display: flex; align-items: center; gap: 6px; border: 1px solid var(--border);
+            background: var(--card); padding: 8px 16px; border-radius: 999px;
+            font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-back-header:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* HERO BAND */
+        .fund-hero {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white; padding: 48px 40px;
+        }
+        .fund-hero-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+        .fund-hero-left { display: flex; align-items: flex-start; gap: 20px; }
+        .fund-hero-icon {
+            width: 64px; height: 64px; border-radius: 18px; display: flex; align-items: center;
+            justify-content: center; font-size: 28px; font-weight: 800; flex-shrink: 0;
+        }
+        .fund-hero-title { font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 8px; }
+        .fund-hero-category { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
+        .fund-hero-rating { display: flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 14px; font-weight: 600; color: #fbbf24; }
+
+        .fund-hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+        .hero-stat { text-align: right; }
+        .hero-stat-label { font-size: 12px; opacity: 0.6; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+        .hero-stat-val { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; }
+
+        /* MAIN CONTENT */
+        .page-content { max-width: 1200px; margin: 0 auto; padding: 40px; display: grid; grid-template-columns: 2fr 1fr; gap: 32px; }
+
+        /* CARDS */
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .card-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .card-title .material-symbols-outlined { font-size: 18px; color: var(--accent); }
+        .full-width { grid-column: 1 / -1; }
+
+        /* CHART */
+        .chart-wrapper { height: 300px; position: relative; }
+
+        /* INFO GRID */
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .info-item { background: #f9fafb; border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+        .info-item-label { font-size: 12px; color: var(--muted); font-weight: 500; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+        .info-item-val { font-size: 18px; font-weight: 700; }
+
+        /* OBJECTIVE */
+        .objective-text { font-size: 15px; line-height: 1.7; color: #374151; background: var(--accent-light); border-left: 4px solid var(--accent); padding: 16px 20px; border-radius: 0 12px 12px 0; }
+
+        /* FUND MANAGERS */
+        .manager-list { display: flex; flex-direction: column; gap: 16px; }
+        .manager-card { display: flex; gap: 16px; align-items: flex-start; padding: 16px; background: #f9fafb; border-radius: 14px; border: 1px solid var(--border); }
+        .manager-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #38ef7d); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; }
+        .manager-name { font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+        .manager-tenure { font-size: 12px; color: var(--muted); font-weight: 500; }
+        .manager-bio { font-size: 13px; color: #4b5563; line-height: 1.5; margin-top: 8px; }
+
+        /* EXIT LOAD */
+        .exit-badge { display: inline-flex; align-items: center; gap: 8px; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 10px; padding: 12px 16px; font-size: 14px; font-weight: 600; color: #c2410c; }
+
+        /* CHAT */
+        .ask-btn {
+            width: 100%; background: linear-gradient(135deg, var(--accent), #38ef7d); color: white;
+            border: none; padding: 16px; border-radius: 14px; font-size: 15px; font-weight: 700;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: all 0.2s; margin-top: 12px;
+        }
+        .ask-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(17,153,142,0.3); }
+
+        /* SKELETON */
+        .skeleton { background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        .sk-line { height: 16px; margin-bottom: 10px; }
+        .sk-title { height: 32px; width: 60%; margin-bottom: 16px; }
+
+        /* LOADING / ERROR */
+        .page-loading { text-align: center; padding: 80px 40px; color: var(--muted); }
+        .page-loading .material-symbols-outlined { font-size: 48px; color: var(--accent); display: block; margin-bottom: 16px; animation: spin 1.2s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        @media (max-width: 900px) {
+            .page-content { grid-template-columns: 1fr; padding: 20px; }
+            .full-width { grid-column: 1; }
+            .fund-hero { padding: 32px 20px; }
+            .fund-hero-inner { flex-direction: column; }
+            .fund-hero-stats { flex-direction: row; }
+            .hero-stat { text-align: left; }
+            header { padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a class="brand" href="/">
+        <span class="material-symbols-outlined logo-icon">monitoring</span> INVESTORA
+    </a>
+    <a class="btn-back-header" href="/">
+        <span class="material-symbols-outlined" style="font-size:18px;">arrow_back</span>
+        Back to Dashboard
+    </a>
+</header>
+
+<!-- FUND HERO -->
+<div class="fund-hero" id="fund-hero" style="display:none;">
+    <div class="fund-hero-inner">
+        <div class="fund-hero-left">
+            <div class="fund-hero-icon" id="hero-icon"></div>
+            <div>
+                <div class="fund-hero-category" id="hero-category">HDFC Mutual Fund · Equity</div>
+                <div class="fund-hero-title" id="hero-title">Loading...</div>
+                <div class="fund-hero-rating" id="hero-rating"></div>
+            </div>
+        </div>
+        <div class="fund-hero-stats" id="hero-stats"></div>
+    </div>
+</div>
+
+<!-- MAIN PAGE CONTENT -->
+<div class="page-content" id="page-content" style="display:none;">
+
+    <!-- Historical Chart (full width) -->
+    <div class="card full-width">
+        <div class="card-title"><span class="material-symbols-outlined">show_chart</span> HISTORICAL NAV PERFORMANCE</div>
+        <div class="chart-wrapper">
+            <canvas id="navChart"></canvas>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:12px;text-align:center;">
+            <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;">info</span>
+            Simulated NAV data for illustration. Connect to a market data API for live historical prices.
+        </p>
+    </div>
+
+    <!-- Left column -->
+    <div style="display:flex;flex-direction:column;gap:24px;">
+
+        <!-- Key Metrics -->
+        <div class="card">
+            <div class="card-title"><span class="material-symbols-outlined">analytics</span> KEY METRICS</div>
+            <div class="info-grid" id="metrics-grid"></div>
+        </div>
+
+        <!-- Investment Objective -->
+        <div class="card">
+            <div class="card-title"><span class="material-symbols-outlined">target</span> INVESTMENT OBJECTIVE</div>
+            <div class="objective-text" id="objective-text">—</div>
+        </div>
+
+        <!-- Fund Managers -->
+        <div class="card">
+            <div class="card-title"><span class="material-symbols-outlined">manage_accounts</span> FUND MANAGERS</div>
+            <div class="manager-list" id="manager-list"></div>
+        </div>
+    </div>
+
+    <!-- Right column -->
+    <div style="display:flex;flex-direction:column;gap:24px;">
+
+        <!-- Minimum Investment -->
+        <div class="card">
+            <div class="card-title"><span class="material-symbols-outlined">payments</span> MINIMUM INVESTMENT</div>
+            <div id="min-investment-content"></div>
+        </div>
+
+        <!-- Exit Load -->
+        <div class="card">
+            <div class="card-title"><span class="material-symbols-outlined">warning</span> EXIT LOAD</div>
+            <div id="exit-load-content"></div>
+        </div>
+
+        <!-- Ask the AI -->
+        <div class="card">
+            <div class="card-title"><span class="material-symbols-outlined">smart_toy</span> ASK INVESTORA AI</div>
+            <p style="font-size:14px;color:var(--muted);margin-bottom:4px;">Have a specific question about this fund? Our AI will answer it from verified documents.</p>
+            <button class="ask-btn" id="ask-ai-btn">
+                <span class="material-symbols-outlined">chat</span>
+                Ask a Question
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<!-- LOADING STATE -->
+<div id="loading-state" class="page-loading">
+    <span class="material-symbols-outlined">sync</span>
+    <p>Loading fund data...</p>
+</div>
+
+<!-- ERROR STATE -->
+<div id="error-state" class="page-loading" style="display:none;">
+    <span class="material-symbols-outlined" style="animation:none;color:#ef4444;">error</span>
+    <p id="error-msg" style="color:#374151;font-weight:600;margin-bottom:8px;">Fund not found.</p>
+    <a href="/" style="color:var(--accent);font-weight:600;text-decoration:none;">← Back to Dashboard</a>
+</div>
+
+<script>
+    // Fund display metadata (colors, abbreviations, display names)
+    const FUND_META = {
+        'hdfc-mid-cap':      { abbr: 'M', color: '#4f46e5', bg: '#e0e7ff', displayName: 'HDFC Mid-Cap Opportunities Fund', category: 'Equity · Mid Cap', returns: '22.4%', chartData: [110, 118, 114, 138, 158, 182, 210] },
+        'hdfc-large-cap':    { abbr: 'T', color: '#0284c7', bg: '#e0f2fe', displayName: 'HDFC Top 100 Fund',               category: 'Equity · Large Cap', returns: '18.2%', chartData: [105, 115, 122, 130, 145, 155, 175] },
+        'hdfc-small-cap':    { abbr: 'S', color: '#dc2626', bg: '#fee2e2', displayName: 'HDFC Small Cap Fund',             category: 'Equity · Small Cap', returns: '28.5%', chartData: [90, 108, 102, 132, 150, 188, 230] },
+        'hdfc-gold-etf-fof': { abbr: 'G', color: '#d97706', bg: '#fef3c7', displayName: 'HDFC Gold ETF FOF',              category: 'Commodity · Gold', returns: '12.0%',  chartData: [100, 108, 120, 130, 142, 152, 165] },
+        'hdfc-defence-fund': { abbr: 'D', color: '#ea580c', bg: '#ffedd5', displayName: 'HDFC Defence Fund',              category: 'Equity · Sectoral', returns: '35.0%',  chartData: [100, 130, 158, 198, 248, 290, 340] },
+    };
+
+    const schemeId = window.location.pathname.split('/').pop();
+    const meta = FUND_META[schemeId];
+
+    // Parse fund managers from the raw fund_management string
+    function parseFundManagers(raw) {
+        if (!raw) return [];
+        // Look for patterns like "CS Chirag Setalvad Jan 2013 - Present"
+        const managerRegex = /([A-Z]{2})\s+([A-Za-z\s]+?)\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{4})\s+-\s+(Present|\d{4})/g;
+        const managers = [];
+        let match;
+        while ((match = managerRegex.exec(raw)) !== null) {
+            const initials = match[1];
+            const name = match[2].trim();
+            const since = `${match[3]} ${match[4]}`;
+            const until = match[5];
+
+            // Extract short education/experience blurb
+            const afterMatch = raw.substring(match.index + match[0].length);
+            const educationMatch = afterMatch.match(/Education\s+(.*?)(?=Experience|$)/s);
+            const experienceMatch = afterMatch.match(/Experience\s+(.*?)(?=Also manages|$)/s);
+
+            let bio = '';
+            if (educationMatch) bio += educationMatch[1].replace(/\s+/g, ' ').trim();
+            if (experienceMatch) bio += ' ' + experienceMatch[1].replace(/\s+/g, ' ').trim();
+            bio = bio.trim().substring(0, 220) + (bio.length > 220 ? '...' : '');
+
+            managers.push({ initials, name, since, until, bio });
+        }
+        return managers;
+    }
+
+    function parseMinInvestment(raw) {
+        if (!raw) return [];
+        const rows = [];
+        const parts = raw.split(/(?=Min\.\s+for)/g).filter(s => s.trim());
+        parts.forEach(p => {
+            const m = p.match(/Min\.\s+for\s+(.+?)\s+(₹[\d,]+|Not Supported)/);
+            if (m) rows.push({ label: m[1].trim(), value: m[2].trim() });
+        });
+        return rows;
+    }
+
+    function renderStars(rating) {
+        if (!rating || rating === '--') return '<span style="opacity:0.6;">Not yet rated</span>';
+        const n = parseInt(rating);
+        if (isNaN(n)) return rating;
+        return '★'.repeat(n) + '☆'.repeat(5 - n) + ` <span style="opacity:0.8;font-size:12px;">${n}/5</span>`;
+    }
+
+    let navChartInstance = null;
+
+    function renderChart(chartData) {
+        const ctx = document.getElementById('navChart').getContext('2d');
+        if (navChartInstance) navChartInstance.destroy();
+
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, 'rgba(17,153,142,0.35)');
+        gradient.addColorStop(1, 'rgba(17,153,142,0.0)');
+
+        navChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: 'NAV (₹)',
+                    data: chartData,
+                    borderColor: '#11998e',
+                    backgroundColor: gradient,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#11998e',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        mode: 'index', intersect: false,
+                        backgroundColor: '#111827', titleFont: { size: 14, weight: 'bold' },
+                        bodyFont: { size: 14 }, padding: 14, cornerRadius: 10, displayColors: false,
+                        callbacks: { label: ctx => `NAV: ₹${ctx.parsed.y}` }
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#6b7280', font: { size: 12 } } },
+                    y: {
+                        grid: { color: '#f3f4f6' },
+                        ticks: { color: '#6b7280', font: { size: 12 }, padding: 10, callback: v => '₹' + v }
+                    }
+                },
+                interaction: { mode: 'nearest', axis: 'x', intersect: false }
+            }
+        });
+    }
+
+    async function loadFundData() {
+        try {
+            const res = await fetch(`/api/fund/${schemeId}`);
+            if (!res.ok) throw new Error('Fund not found');
+            const data = await res.json();
+
+            // Hide loading, show content
+            document.getElementById('loading-state').style.display = 'none';
+            document.getElementById('fund-hero').style.display = 'block';
+            document.getElementById('page-content').style.display = 'grid';
+
+            const displayName = meta ? meta.displayName : data.scheme_id;
+            const color = meta ? meta.color : '#11998e';
+            const bg = meta ? meta.bg : '#eefdf4';
+            const abbr = meta ? meta.abbr : schemeId[0].toUpperCase();
+            const category = meta ? meta.category : 'Equity';
+            const returns = meta ? meta.returns : '—';
+            const chartData = meta ? meta.chartData : [100, 110, 108, 125, 140, 160, 180];
+
+            // Hero
+            document.title = `${displayName} — Investora`;
+            const heroIcon = document.getElementById('hero-icon');
+            heroIcon.textContent = abbr;
+            heroIcon.style.background = bg;
+            heroIcon.style.color = color;
+            document.getElementById('hero-category').textContent = `HDFC Mutual Fund · ${category}`;
+            document.getElementById('hero-title').textContent = displayName;
+            document.getElementById('hero-rating').innerHTML = renderStars(data.metrics?.Rating);
+
+            // Hero stats
+            const statsHtml = `
+                <div class="hero-stat"><div class="hero-stat-label">Avg. Annual Return</div><div class="hero-stat-val">${returns}</div></div>
+                <div class="hero-stat"><div class="hero-stat-label">Expense Ratio</div><div class="hero-stat-val">${data.metrics?.['Expense ratio'] || '—'}</div></div>
+                <div class="hero-stat"><div class="hero-stat-label">Min. SIP</div><div class="hero-stat-val">${data.metrics?.['Min. for SIP'] || '—'}</div></div>
+            `;
+            document.getElementById('hero-stats').innerHTML = statsHtml;
+
+            // Key Metrics
+            const metricsHtml = [
+                { label: 'Expense Ratio', val: data.metrics?.['Expense ratio'] || '—' },
+                { label: 'Min. SIP', val: data.metrics?.['Min. for SIP'] || '—' },
+                { label: 'Rating', val: data.metrics?.Rating || '—' },
+                { label: 'Avg. Annual Return', val: returns },
+            ].map(m => `
+                <div class="info-item">
+                    <div class="info-item-label">${m.label}</div>
+                    <div class="info-item-val">${m.val}</div>
+                </div>
+            `).join('');
+            document.getElementById('metrics-grid').innerHTML = metricsHtml;
+
+            // Investment Objective
+            document.getElementById('objective-text').textContent =
+                data.sections?.investment_objective || 'No investment objective available.';
+
+            // Fund Managers
+            const managers = parseFundManagers(data.sections?.fund_management || '');
+            const managerHtml = managers.length > 0 ? managers.map(m => `
+                <div class="manager-card">
+                    <div class="manager-avatar">${m.name.split(' ').map(w => w[0]).slice(0,2).join('')}</div>
+                    <div>
+                        <div class="manager-name">${m.name}</div>
+                        <div class="manager-tenure">Since ${m.since} · ${m.until === 'Present' ? 'Currently managing' : 'Until ' + m.until}</div>
+                        ${m.bio ? `<div class="manager-bio">${m.bio}</div>` : ''}
+                    </div>
+                </div>
+            `).join('') : '<p style="color:var(--muted);font-size:14px;">Fund manager details not available.</p>';
+            document.getElementById('manager-list').innerHTML = managerHtml;
+
+            // Minimum Investment
+            const minRows = parseMinInvestment(data.sections?.minimum_investment || '');
+            const minHtml = minRows.length > 0 ? minRows.map(r => `
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);">
+                    <span style="font-size:14px;color:var(--muted);">${r.label}</span>
+                    <span style="font-size:16px;font-weight:700;">${r.value}</span>
+                </div>
+            `).join('') : `<p style="font-size:14px;color:var(--muted);">${data.sections?.minimum_investment || '—'}</p>`;
+            document.getElementById('min-investment-content').innerHTML = minHtml;
+
+            // Exit Load
+            const exitLoad = data.sections?.exit_load || '—';
+            document.getElementById('exit-load-content').innerHTML = `
+                <div class="exit-badge">
+                    <span class="material-symbols-outlined" style="font-size:18px;">warning_amber</span>
+                    ${exitLoad}
+                </div>
+            `;
+
+            // Ask AI button
+            document.getElementById('ask-ai-btn').addEventListener('click', () => {
+                window.location.href = `/?fund=${schemeId}`;
+            });
+
+            // Render chart
+            renderChart(chartData);
+
+        } catch (err) {
+            document.getElementById('loading-state').style.display = 'none';
+            document.getElementById('error-state').style.display = 'block';
+            document.getElementById('error-msg').textContent = `Could not load data for "${schemeId}". ${err.message}`;
+        }
+    }
+
+    // Handle the ?fund= redirect from the "Ask AI" button
+    window.addEventListener('DOMContentLoaded', () => {
+        if (!schemeId || schemeId === 'fund') {
+            window.location.href = '/';
+            return;
+        }
+        loadFundData();
+    });
+</script>
+</body>
+</html>
