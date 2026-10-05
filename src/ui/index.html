@@ -469,7 +469,7 @@
     </div>
 
     <script>
-        const API_URL = '/api/chat';
+        const API_URL = (window.location.protocol === 'file:' || (window.location.port && window.location.port !== '8001')) ? 'http://127.0.0.1:8001/api/chat' : '/api/chat';
         const landingView = document.getElementById('landing-view');
         const chatView = document.getElementById('chat-view');
         const messagesArea = document.getElementById('messages-area');
@@ -554,6 +554,7 @@
         }
 
         function addMessage(role, content) {
+            if (typeof content !== 'string') content = String(content || '');
             const div = document.createElement('div');
             div.className = `message ${role}-msg`;
             const avatarIcon = role === 'user' ? 'person' : 'smart_toy';
@@ -747,15 +748,19 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
+                if (!resp.ok) {
+                    const errData = await resp.json().catch(() => ({}));
+                    throw new Error(errData.detail || errData.message || `Server returned status ${resp.status}`);
+                }
                 const data = await resp.json();
                 if (data.sources && data.sources.length > 0) {
                     currentFundContext = data.sources[0];
                 }
                 removeTypingIndicator();
-                addMessage('bot', data.answer);
+                addMessage('bot', data.answer || 'No response returned from model.');
             } catch (err) {
                 removeTypingIndicator();
-                addMessage('bot', 'Sorry, there was an error connecting to the server. Please ensure the backend is running.');
+                addMessage('bot', `Sorry, there was an error connecting to the server (${err.message}). Please ensure the backend is running at http://127.0.0.1:8001.`);
             }
             sendBtn.disabled = false;
             queryInput.focus();

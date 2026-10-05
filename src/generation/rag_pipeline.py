@@ -19,10 +19,11 @@ _llm_instance = None
 def get_llm():
     global _llm_instance
     if _llm_instance is None:
+        model_name = os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b")
         _llm_instance = ChatGroq(
-            model="llama-3.1-8b-instant",
+            model=model_name,
             temperature=0.0,  # Factual retrieval, no creativity
-            max_tokens=150,
+            max_tokens=300,
         )
     return _llm_instance
 

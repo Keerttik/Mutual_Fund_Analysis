@@ -31,13 +31,20 @@ def chat_endpoint(request: ChatRequest):
         return ChatResponse(answer=block_msg, blocked=True)
         
     # 2. RAG Generation
-    raw_answer, source_schemes = generate_answer(request.query, request.fund_context)
-    
-    # 3. Output Guardrail
-    source_str = ", ".join(source_schemes) if source_schemes else "General Document"
-    final_answer = apply_output_guardrails(raw_answer, source_str)
-    
-    return ChatResponse(answer=final_answer, sources=source_schemes)
+    try:
+        raw_answer, source_schemes = generate_answer(request.query, request.fund_context)
+        # 3. Output Guardrail
+        source_str = ", ".join(source_schemes) if source_schemes else "General Document"
+        final_answer = apply_output_guardrails(raw_answer, source_str)
+        return ChatResponse(answer=final_answer, sources=source_schemes)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return ChatResponse(
+            answer=f"Sorry, an error occurred while processing your request: {str(e)}",
+            blocked=True,
+            sources=[]
+        )
 
 @router.get("/fund/{scheme_id}")
 def get_fund_detail(scheme_id: str):
