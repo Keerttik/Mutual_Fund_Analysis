@@ -46,9 +46,9 @@ class MutualFundRetriever:
                     
         return list(matched_schemes)
 
-    def get_context(self, query: str, k: int = 4, fund_context: str = None):
+    def get_context(self, query: str, k: int = 5, fund_context: str = None):
         """
-        Retrieves top k chunks matching the query, pre-filtered by detected scheme(s).
+        Retrieves top k chunks matching the query, pre-filtered by detected scheme(s) + general FAQs.
         Returns a list of tuples: (Document, score)
         """
         detected_schemes = self._extract_schemes(query)
@@ -56,10 +56,10 @@ class MutualFundRetriever:
             detected_schemes = [fund_context]
         
         filter_kwargs = {}
-        if len(detected_schemes) == 1:
-            filter_kwargs = {"scheme_id": detected_schemes[0]}
-        elif len(detected_schemes) > 1:
-            filter_kwargs = {"scheme_id": {"$in": detected_schemes}}
+        if detected_schemes:
+            # Include 'general' so general FAQs can also be matched alongside the scheme
+            schemes_to_query = list(set(detected_schemes + ["general"]))
+            filter_kwargs = {"scheme_id": {"$in": schemes_to_query}}
             
         print(f"[Retriever] Query: '{query}'")
         print(f"[Retriever] Detected Schemes: {detected_schemes}")

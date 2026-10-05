@@ -353,7 +353,8 @@
 
     async function loadFundData() {
         try {
-            const API_BASE = (window.location.protocol === 'file:' || (window.location.port && window.location.port !== '8001')) ? 'http://127.0.0.1:8001' : '';
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+            const API_BASE = (isLocal && window.location.port !== '8001') ? 'http://127.0.0.1:8001' : '';
             const res = await fetch(`${API_BASE}/api/fund/${schemeId}`);
             if (!res.ok) throw new Error('Fund not found');
             const data = await res.json();

@@ -1,6 +1,6 @@
 [
   {
-    "page_content": "Hdfc Defence Fund Metrics: Min. for SIP is ₹100, Expense ratio is 0.89%, Rating is --",
+    "page_content": "Hdfc Defence Fund Metrics: NAV is ₹30.224 as of 01-Oct-2026, Min. for SIP is ₹100, Expense ratio is 0.89%, Rating is --, Benchmark is Nifty India Defence Total Return Index, Riskometer is Very High, Exit Load is Exit load of 1%, if redeemed within 1 year., Fund House is HDFC",
     "metadata": {
       "scheme_id": "hdfc-defence-fund",
       "section_name": "metrics",
@@ -56,10 +56,50 @@
     }
   },
   {
+    "page_content": "Hdfc Defence Fund - Overview:\nHDFC Defence Fund is an open-ended Thematic scheme managed by HDFC. The benchmark index is Nifty India Defence Total Return Index (Nifty India Defence TRI).",
+    "metadata": {
+      "scheme_id": "hdfc-defence-fund",
+      "section_name": "overview",
+      "type": "section"
+    }
+  },
+  {
     "page_content": "Hdfc Defence Fund - Investment Objective:\nThe scheme seeks to provide long-term capital appreciation by investing predominantly in equity and equity related securities of Defence & allied sector companies.",
     "metadata": {
       "scheme_id": "hdfc-defence-fund",
       "section_name": "investment_objective",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Defence Fund - Fund House:\nHDFC Mutual Fund is managed by HDFC Asset Management Company (AMC) Limited, one of India's largest and most trusted mutual fund houses.",
+    "metadata": {
+      "scheme_id": "hdfc-defence-fund",
+      "section_name": "fund_house",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Defence Fund - Benchmark:\nThe benchmark index for HDFC Defence Fund is Nifty India Defence Total Return Index (Nifty India Defence TRI).",
+    "metadata": {
+      "scheme_id": "hdfc-defence-fund",
+      "section_name": "benchmark",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Defence Fund - Riskometer:\nThe riskometer classification for HDFC Defence Fund is Very High. It carries a Very High risk profile as per regulatory risk-o-meter guidelines.",
+    "metadata": {
+      "scheme_id": "hdfc-defence-fund",
+      "section_name": "riskometer",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Defence Fund - Expense Ratio:\nThe expense ratio for HDFC Defence Fund (Direct Plan) is 0.89%.",
+    "metadata": {
+      "scheme_id": "hdfc-defence-fund",
+      "section_name": "expense_ratio",
       "type": "section"
     }
   }

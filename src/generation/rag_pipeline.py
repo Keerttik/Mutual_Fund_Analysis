@@ -50,8 +50,14 @@ def format_docs(docs_with_scores):
         formatted_texts.append(doc.page_content)
     return "\n\n".join(formatted_texts)
 
+MODELS_TO_TRY = [
+    os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b"),
+    "openai/gpt-oss-120b",
+    "openai/gpt-oss-20b"
+]
+
 def generate_answer(query: str, fund_context: str = None) -> tuple[str, list[str]]:
-    """Retrieves context and generates an answer. Returns (answer, list_of_scheme_ids)."""
+    """Retrieves context and generates an answer using Groq with multi-model fallback. Returns (answer, list_of_scheme_ids)."""
     docs_with_scores = retriever.get_context(query, fund_context=fund_context)
     
     if not docs_with_scores:
@@ -59,20 +65,38 @@ def generate_answer(query: str, fund_context: str = None) -> tuple[str, list[str
         
     context_str = format_docs(docs_with_scores)
     
-    # Extract unique sources
-    sources = set()
+    # Extract unique sources (excluding 'general' from fund scheme citations if fund schemes are present)
+    fund_sources = set()
+    general_present = False
     for doc, _ in docs_with_scores:
-        if "scheme_id" in doc.metadata:
-            sources.add(doc.metadata["scheme_id"])
+        sid = doc.metadata.get("scheme_id")
+        if sid:
+            if sid == "general":
+                general_present = True
+            else:
+                fund_sources.add(sid)
+                
+    sources = list(fund_sources) if fund_sources else (["HDFC Mutual Fund Guidelines"] if general_present else [])
 
-    chain = prompt | get_llm() | StrOutputParser()
-    
-    response = chain.invoke({
-        "context": context_str,
-        "question": query
-    })
-    
-    return response, list(sources)
+    last_error = None
+    for model_name in MODELS_TO_TRY:
+        try:
+            llm = ChatGroq(
+                model=model_name,
+                temperature=0.0,
+                max_tokens=300,
+            )
+            chain = prompt | llm | StrOutputParser()
+            response = chain.invoke({
+                "context": context_str,
+                "question": query
+            })
+            return response, sources
+        except Exception as e:
+            print(f"[RAG] Groq model '{model_name}' failed: {e}. Trying next available model...")
+    if last_error:
+        raise last_error
+    raise RuntimeError("No Groq models available to complete generation.")
 
 if __name__ == "__main__":
     test_q = "What is the exit load for the defence fund?"

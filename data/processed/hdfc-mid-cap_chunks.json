@@ -1,6 +1,6 @@
 [
   {
-    "page_content": "Hdfc Mid Cap Metrics: Min. for SIP is ₹100, Expense ratio is 0.76%, Rating is 4",
+    "page_content": "Hdfc Mid Cap Metrics: NAV is ₹219.441 as of 01-Oct-2026, Min. for SIP is ₹100, Expense ratio is 0.76%, Rating is 4, Benchmark is NIFTY Midcap 150 Total Return Index, Riskometer is Very High, Exit Load is Exit load of 1% if redeemed within 1 year., Fund House is HDFC",
     "metadata": {
       "scheme_id": "hdfc-mid-cap",
       "section_name": "metrics",
@@ -48,10 +48,50 @@
     }
   },
   {
+    "page_content": "Hdfc Mid Cap - Overview:\nHDFC Mid Cap Fund is an open-ended Mid Cap scheme managed by HDFC. The benchmark index is NIFTY Midcap 150 Total Return Index (NIFTY Midcap 150 TRI).",
+    "metadata": {
+      "scheme_id": "hdfc-mid-cap",
+      "section_name": "overview",
+      "type": "section"
+    }
+  },
+  {
     "page_content": "Hdfc Mid Cap - Investment Objective:\nThe scheme seeks to provide long-term capital appreciation/income by investing predominantly in Mid-Cap companies.",
     "metadata": {
       "scheme_id": "hdfc-mid-cap",
       "section_name": "investment_objective",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Mid Cap - Fund House:\nHDFC Mutual Fund is managed by HDFC Asset Management Company (AMC) Limited, one of India's largest and most trusted mutual fund houses.",
+    "metadata": {
+      "scheme_id": "hdfc-mid-cap",
+      "section_name": "fund_house",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Mid Cap - Benchmark:\nThe benchmark index for HDFC Mid Cap Fund is NIFTY Midcap 150 Total Return Index (NIFTY Midcap 150 TRI).",
+    "metadata": {
+      "scheme_id": "hdfc-mid-cap",
+      "section_name": "benchmark",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Mid Cap - Riskometer:\nThe riskometer classification for HDFC Mid Cap Fund is Very High. It carries a Very High risk profile as per regulatory risk-o-meter guidelines.",
+    "metadata": {
+      "scheme_id": "hdfc-mid-cap",
+      "section_name": "riskometer",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Mid Cap - Expense Ratio:\nThe expense ratio for HDFC Mid Cap Fund (Direct Plan) is 0.76%.",
+    "metadata": {
+      "scheme_id": "hdfc-mid-cap",
+      "section_name": "expense_ratio",
       "type": "section"
     }
   }

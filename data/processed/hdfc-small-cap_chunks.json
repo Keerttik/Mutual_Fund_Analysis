@@ -1,6 +1,6 @@
 [
   {
-    "page_content": "Hdfc Small Cap Metrics: Min. for SIP is ₹100, Expense ratio is 0.79%, Rating is 3",
+    "page_content": "Hdfc Small Cap Metrics: NAV is ₹155.006 as of 01-Oct-2026, Min. for SIP is ₹100, Expense ratio is 0.79%, Rating is 3, Benchmark is BSE 250 SmallCap Total Return Index, Riskometer is Very High, Exit Load is Exit load of 1% if redeemed within 1 year, Fund House is HDFC",
     "metadata": {
       "scheme_id": "hdfc-small-cap",
       "section_name": "metrics",
@@ -56,10 +56,50 @@
     }
   },
   {
+    "page_content": "Hdfc Small Cap - Overview:\nHDFC Small Cap Fund is an open-ended Small Cap scheme managed by HDFC. The benchmark index is BSE 250 SmallCap Total Return Index (BSE 250 SmallCap TRI).",
+    "metadata": {
+      "scheme_id": "hdfc-small-cap",
+      "section_name": "overview",
+      "type": "section"
+    }
+  },
+  {
     "page_content": "Hdfc Small Cap - Investment Objective:\nThe scheme seeks to provide long-term capital appreciation /income by investing predominantly in Small-Cap companies.",
     "metadata": {
       "scheme_id": "hdfc-small-cap",
       "section_name": "investment_objective",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Small Cap - Fund House:\nHDFC Mutual Fund is managed by HDFC Asset Management Company (AMC) Limited, one of India's largest and most trusted mutual fund houses.",
+    "metadata": {
+      "scheme_id": "hdfc-small-cap",
+      "section_name": "fund_house",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Small Cap - Benchmark:\nThe benchmark index for HDFC Small Cap Fund is BSE 250 SmallCap Total Return Index (BSE 250 SmallCap TRI).",
+    "metadata": {
+      "scheme_id": "hdfc-small-cap",
+      "section_name": "benchmark",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Small Cap - Riskometer:\nThe riskometer classification for HDFC Small Cap Fund is Very High. It carries a Very High risk profile as per regulatory risk-o-meter guidelines.",
+    "metadata": {
+      "scheme_id": "hdfc-small-cap",
+      "section_name": "riskometer",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Small Cap - Expense Ratio:\nThe expense ratio for HDFC Small Cap Fund (Direct Plan) is 0.79%.",
+    "metadata": {
+      "scheme_id": "hdfc-small-cap",
+      "section_name": "expense_ratio",
       "type": "section"
     }
   }

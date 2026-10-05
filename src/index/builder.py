@@ -44,6 +44,18 @@ def build_index():
     
     INDEX_DIR.mkdir(parents=True, exist_ok=True)
     
+    # Reset existing collection to prevent accumulation of duplicate chunks on repeated runs
+    try:
+        existing_store = Chroma(
+            persist_directory=str(INDEX_DIR),
+            embedding_function=embeddings,
+            collection_name="mutual_funds"
+        )
+        existing_store.delete_collection()
+        print("Previous collection cleared.")
+    except Exception as e:
+        print(f"Collection reset notice: {e}")
+
     vector_store = Chroma.from_documents(
         documents=documents,
         embedding=embeddings,
@@ -57,8 +69,7 @@ def build_index():
     print("\n--- Testing the Vector Store ---")
     results = vector_store.similarity_search("What is the expense ratio?", k=2, filter={"scheme_id": "hdfc-defence-fund"})
     for i, res in enumerate(results):
-        print(f"\nResult {i+1} [Metadata: {res.metadata}]:")
-        print(res.page_content)
+        print(res.page_content.encode('ascii', 'ignore').decode('ascii'))
 
 if __name__ == "__main__":
     build_index()

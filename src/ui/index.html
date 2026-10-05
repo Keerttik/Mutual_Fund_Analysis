@@ -469,7 +469,8 @@
     </div>
 
     <script>
-        const API_URL = (window.location.protocol === 'file:' || (window.location.port && window.location.port !== '8001')) ? 'http://127.0.0.1:8001/api/chat' : '/api/chat';
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+        const API_URL = (isLocal && window.location.port !== '8001') ? 'http://127.0.0.1:8001/api/chat' : '/api/chat';
         const landingView = document.getElementById('landing-view');
         const chatView = document.getElementById('chat-view');
         const messagesArea = document.getElementById('messages-area');
@@ -760,7 +761,8 @@
                 addMessage('bot', data.answer || 'No response returned from model.');
             } catch (err) {
                 removeTypingIndicator();
-                addMessage('bot', `Sorry, there was an error connecting to the server (${err.message}). Please ensure the backend is running at http://127.0.0.1:8001.`);
+                const hint = isLocal ? ' Please ensure the backend is running at http://127.0.0.1:8001.' : ' Please try again in a few moments.';
+                addMessage('bot', `Sorry, there was an issue communicating with the assistant (${err.message}).${hint}`);
             }
             sendBtn.disabled = false;
             queryInput.focus();

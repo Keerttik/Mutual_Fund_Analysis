@@ -1,6 +1,6 @@
 [
   {
-    "page_content": "Hdfc Gold Etf Fof Metrics: Min. for SIP is ₹100, Expense ratio is 0.20%, Rating is 3",
+    "page_content": "Hdfc Gold Etf Fof Metrics: NAV is ₹45.8219 as of 01-Oct-2026, Min. for SIP is ₹100, Expense ratio is 0.20%, Rating is 3, Benchmark is Domestic Price of Gold, Riskometer is High, Exit Load is Exit load of 1%, if redeemed within 15 days., Fund House is HDFC",
     "metadata": {
       "scheme_id": "hdfc-gold-etf-fof",
       "section_name": "metrics",
@@ -72,10 +72,50 @@
     }
   },
   {
+    "page_content": "Hdfc Gold Etf Fof - Overview:\nHDFC Gold ETF Fund is an open-ended Gold scheme managed by HDFC. The benchmark index is Domestic Price of Gold.",
+    "metadata": {
+      "scheme_id": "hdfc-gold-etf-fof",
+      "section_name": "overview",
+      "type": "section"
+    }
+  },
+  {
     "page_content": "Hdfc Gold Etf Fof - Investment Objective:\nThe Scheme seeks to generate capital appreciation by investing in units of HDFC Gold Exchange Traded Fund.",
     "metadata": {
       "scheme_id": "hdfc-gold-etf-fof",
       "section_name": "investment_objective",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Gold Etf Fof - Fund House:\nHDFC Mutual Fund is managed by HDFC Asset Management Company (AMC) Limited, one of India's largest and most trusted mutual fund houses.",
+    "metadata": {
+      "scheme_id": "hdfc-gold-etf-fof",
+      "section_name": "fund_house",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Gold Etf Fof - Benchmark:\nThe benchmark index for HDFC Gold ETF Fund is Domestic Price of Gold.",
+    "metadata": {
+      "scheme_id": "hdfc-gold-etf-fof",
+      "section_name": "benchmark",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Gold Etf Fof - Riskometer:\nThe riskometer classification for HDFC Gold ETF Fund is High. It carries a High risk profile as per regulatory risk-o-meter guidelines.",
+    "metadata": {
+      "scheme_id": "hdfc-gold-etf-fof",
+      "section_name": "riskometer",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "Hdfc Gold Etf Fof - Expense Ratio:\nThe expense ratio for HDFC Gold ETF Fund (Direct Plan) is 0.2%.",
+    "metadata": {
+      "scheme_id": "hdfc-gold-etf-fof",
+      "section_name": "expense_ratio",
       "type": "section"
     }
   }

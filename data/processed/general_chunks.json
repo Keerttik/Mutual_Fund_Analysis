@@ -1,0 +1,26 @@
+[
+  {
+    "page_content": "General - Elss Lock In:\nEquity Linked Savings Scheme (ELSS) mutual funds have a mandatory statutory lock-in period of 3 years from the date of unit allotment under Section 80C of the Income Tax Act. During this 3-year lock-in period, investments cannot be redeemed, switched, or withdrawn. For SIP investments in an ELSS fund, each monthly installment has its own individual 3-year lock-in period calculated from its respective allotment date.",
+    "metadata": {
+      "scheme_id": "general",
+      "section_name": "elss_lock_in",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "General - Download Statements:\nTo download your HDFC Mutual Fund account statement or capital gains tax statement:\n1. Official Website: Visit the HDFC Mutual Fund portal (hdfcfund.com) and log in to the Investor Services section using your PAN or Folio number.\n2. RTA Consolidated Account Statement (CAS): Request an instant mailback statement through CAMS (camsonline.com) or KFintech using your registered email and PAN.\n3. Investment App: In the Groww app or web portal, go to Profile > Reports > Mutual Fund Statements or Capital Gains Report to download your statement directly.",
+    "metadata": {
+      "scheme_id": "general",
+      "section_name": "download_statements",
+      "type": "section"
+    }
+  },
+  {
+    "page_content": "General - Taxation Rules:\nFor Equity Mutual Funds in India: Long-Term Capital Gains (LTCG) on equity investments held for more than 12 months are taxed at 12.5% on gains exceeding ₹1.25 lakh in a financial year. Short-Term Capital Gains (STCG) on equity investments held for 12 months or less are taxed at 20%.",
+    "metadata": {
+      "scheme_id": "general",
+      "section_name": "taxation_rules",
+      "type": "section"
+    }
+  }
+]
