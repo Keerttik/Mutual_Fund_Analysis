@@ -1,9 +1,9 @@
 {
   "scheme_id": "hdfc-defence-fund",
   "metrics": {
-    "NAV": "₹30.246 as of 12-Oct-2026",
+    "NAV": "₹30.588 as of 13-Oct-2026",
     "Min. for SIP": "₹100",
-    "Expense ratio": "0.90%",
+    "Expense ratio": "0.89%",
     "Rating": "--",
     "Benchmark": "Nifty India Defence Total Return Index",
     "Riskometer": "Very High",
@@ -19,6 +19,6 @@
     "fund_house": "HDFC Mutual Fund is managed by HDFC Asset Management Company (AMC) Limited, one of India's largest and most trusted mutual fund houses.",
     "benchmark": "The benchmark index for HDFC Defence Fund is Nifty India Defence Total Return Index (Nifty India Defence TRI).",
     "riskometer": "The riskometer classification for HDFC Defence Fund is Very High. It carries a Very High risk profile as per regulatory risk-o-meter guidelines.",
-    "expense_ratio": "The expense ratio for HDFC Defence Fund (Direct Plan) is 0.9%."
+    "expense_ratio": "The expense ratio for HDFC Defence Fund (Direct Plan) is 0.89%."
   }
 }
