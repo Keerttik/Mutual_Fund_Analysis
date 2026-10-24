@@ -1,9 +1,9 @@
 {
   "scheme_id": "hdfc-small-cap",
   "metrics": {
-    "NAV": "₹150.802 as of 22-Oct-2026",
+    "NAV": "₹148.394 as of 23-Oct-2026",
     "Min. for SIP": "₹100",
-    "Expense ratio": "0.79%",
+    "Expense ratio": "0.80%",
     "Rating": "3",
     "Benchmark": "BSE 250 SmallCap Total Return Index",
     "Riskometer": "Very High",
@@ -19,6 +19,6 @@
     "fund_house": "HDFC Mutual Fund is managed by HDFC Asset Management Company (AMC) Limited, one of India's largest and most trusted mutual fund houses.",
     "benchmark": "The benchmark index for HDFC Small Cap Fund is BSE 250 SmallCap Total Return Index (BSE 250 SmallCap TRI).",
     "riskometer": "The riskometer classification for HDFC Small Cap Fund is Very High. It carries a Very High risk profile as per regulatory risk-o-meter guidelines.",
-    "expense_ratio": "The expense ratio for HDFC Small Cap Fund (Direct Plan) is 0.79%."
+    "expense_ratio": "The expense ratio for HDFC Small Cap Fund (Direct Plan) is 0.8%."
   }
 }
