@@ -1,9 +1,9 @@
 {
   "scheme_id": "hdfc-mid-cap",
   "metrics": {
-    "NAV": "₹214.641 as of 26-Oct-2026",
+    "NAV": "₹216.123 as of 27-Oct-2026",
     "Min. for SIP": "₹100",
-    "Expense ratio": "0.74%",
+    "Expense ratio": "0.75%",
     "Rating": "4",
     "Benchmark": "NIFTY Midcap 150 Total Return Index",
     "Riskometer": "Very High",
@@ -19,6 +19,6 @@
     "fund_house": "HDFC Mutual Fund is managed by HDFC Asset Management Company (AMC) Limited, one of India's largest and most trusted mutual fund houses.",
     "benchmark": "The benchmark index for HDFC Mid Cap Fund is NIFTY Midcap 150 Total Return Index (NIFTY Midcap 150 TRI).",
     "riskometer": "The riskometer classification for HDFC Mid Cap Fund is Very High. It carries a Very High risk profile as per regulatory risk-o-meter guidelines.",
-    "expense_ratio": "The expense ratio for HDFC Mid Cap Fund (Direct Plan) is 0.74%."
+    "expense_ratio": "The expense ratio for HDFC Mid Cap Fund (Direct Plan) is 0.75%."
   }
 }
