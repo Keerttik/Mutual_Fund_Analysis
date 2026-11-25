@@ -3,7 +3,7 @@
   "metrics": {
     "NAV": "₹1277.914 as of 23-Nov-2026",
     "Min. for SIP": "₹100",
-    "Expense ratio": "0.99%",
+    "Expense ratio": "0.98%",
     "Rating": "4",
     "Benchmark": "NIFTY 100 Total Return Index",
     "Riskometer": "Very High",
@@ -19,6 +19,6 @@
     "fund_house": "HDFC Mutual Fund is managed by HDFC Asset Management Company (AMC) Limited, one of India's largest and most trusted mutual fund houses.",
     "benchmark": "The benchmark index for HDFC Large Cap Fund is NIFTY 100 Total Return Index (NIFTY 100 TRI).",
     "riskometer": "The riskometer classification for HDFC Large Cap Fund is Very High. It carries a Very High risk profile as per regulatory risk-o-meter guidelines.",
-    "expense_ratio": "The expense ratio for HDFC Large Cap Fund (Direct Plan) is 0.99%."
+    "expense_ratio": "The expense ratio for HDFC Large Cap Fund (Direct Plan) is 0.98%."
   }
 }
